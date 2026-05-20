@@ -1,14 +1,14 @@
 <div align="center">
   <h1>BKhanggDesu — Clothes E-commerce Claude UI</h1>
   <p align="center">
-    A Laravel web application for managing product categories in the fashion/clothing industry.<br>
-    Built with the <strong>Heritage</strong> design system — flat, minimal, and typography-driven.<br>
-    Supports bilingual interface (English / Vietnamese).
+    Ứng dụng web Laravel quản lý danh mục sản phẩm thời trang.<br>
+    Xây dựng với <strong>Heritage</strong> design system — phong cách flat, tối giản, đề cao typography.<br>
+    Hỗ trợ song ngữ Anh — Việt.
   </p>
 
   <p align="center">
-    This project serves as the foundational admin panel for a clothing e-commerce platform,<br>
-    featuring authentication, category management, and a polished UI system ready for extension.
+    Dự án là admin panel nền tảng cho website bán quần áo thương mại điện tử,<br>
+    bao gồm xác thực người dùng, quản lý danh mục sản phẩm và hệ thống UI chỉn chu sẵn sàng mở rộng.
   </p>
 
   <p>
