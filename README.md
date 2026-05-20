@@ -1,8 +1,14 @@
 <div align="center">
-  <h1>BKhanggDesu</h1>
+  <h1>BKhanggDesu — Clothes E-commerce Claude UI</h1>
   <p align="center">
-    A Laravel application with the <strong>Heritage</strong> design system —<br>
-    flat, minimal, and typography-driven.
+    A Laravel web application for managing product categories in the fashion/clothing industry.<br>
+    Built with the <strong>Heritage</strong> design system — flat, minimal, and typography-driven.<br>
+    Supports bilingual interface (English / Vietnamese).
+  </p>
+
+  <p align="center">
+    This project serves as the foundational admin panel for a clothing e-commerce platform,<br>
+    featuring authentication, category management, and a polished UI system ready for extension.
   </p>
 
   <p>
