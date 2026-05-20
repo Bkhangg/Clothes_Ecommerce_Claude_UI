@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&family=Space+Grotesk:wght@500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply font-body text-primary bg-neutral antialiased;
+    }
+
+    ::selection {
+        @apply bg-tertiary/15 text-primary;
+    }
+
+    ::-webkit-scrollbar {
+        @apply w-1.5;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-secondary/20 rounded-full hover:bg-secondary/30 transition-colors;
+    }
+}
+
+[x-cloak] { display: none !important; }
+
+@keyframes toast-shrink {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+.animate-bounce {
+    animation: toast-bounce 0.6s ease-out;
+}
+
+@keyframes toast-bounce {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.15); }
+    70% { transform: scale(0.95); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-5 py-3 bg-tertiary text-surface rounded-md font-label text-xs uppercase tracking-[0.08em] font-medium transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center px-5 py-3 bg-neutral text-primary rounded-md font-label text-xs uppercase tracking-[0.08em] font-medium transition-colors hover:bg-secondary/10 focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none;
+    }
+
+    .input-field {
+        @apply block w-full border border-secondary/20 bg-surface text-primary rounded-md px-4 py-3 text-sm font-body placeholder:text-secondary/50 focus:border-tertiary focus:ring-1 focus:ring-tertiary transition-colors;
+    }
+
+    .input-label {
+        @apply block font-label text-xs uppercase tracking-[0.08em] text-secondary mb-2;
+    }
+
+    .input-error {
+        @apply text-xs text-tertiary mt-1;
+    }
+
+    .card {
+        @apply bg-surface rounded-lg p-6 border border-secondary/5;
+    }
+
+    .card-hover {
+        @apply card hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300;
+    }
+
+    .auth-link {
+        @apply text-sm text-secondary hover:text-primary transition-colors;
+    }
+
+    .page-enter {
+        animation: page-enter 0.4s ease-out both;
+    }
+
+    @keyframes page-enter {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stat-icon {
+        @apply w-10 h-10 rounded-md bg-neutral flex items-center justify-center text-secondary/40 group-hover:bg-tertiary/5 group-hover:text-tertiary transition-all duration-300;
+    }
+}

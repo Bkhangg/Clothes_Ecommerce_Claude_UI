@@ -1,0 +1,52 @@
+<?php
+
+return [
+    'accepted' => 'Trường :attribute phải được chấp nhận.',
+    'accepted_if' => 'Trường :attribute phải được chấp nhận khi :other là :value.',
+    'active_url' => 'Trường :attribute không phải là URL hợp lệ.',
+    'after' => 'Trường :attribute phải là ngày sau :date.',
+    'after_or_equal' => 'Trường :attribute phải là ngày sau hoặc bằng :date.',
+    'alpha' => 'Trường :attribute chỉ được chứa chữ cái.',
+    'alpha_dash' => 'Trường :attribute chỉ được chứa chữ cái, số, dấu gạch ngang và gạch dưới.',
+    'alpha_num' => 'Trường :attribute chỉ được chứa chữ cái và số.',
+    'array' => 'Trường :attribute phải là mảng.',
+    'before' => 'Trường :attribute phải là ngày trước :date.',
+    'before_or_equal' => 'Trường :attribute phải là ngày trước hoặc bằng :date.',
+    'between' => [
+        'array' => 'Trường :attribute phải có từ :min đến :max phần tử.',
+        'file' => 'Dung lượng :attribute phải từ :min đến :max kilobytes.',
+        'numeric' => 'Trường :attribute phải nằm trong khoảng :min đến :max.',
+        'string' => 'Trường :attribute phải có độ dài từ :min đến :max ký tự.',
+    ],
+    'confirmed' => 'Xác nhận :attribute không khớp.',
+    'current_password' => 'Mật khẩu không đúng.',
+    'email' => 'Trường :attribute phải là địa chỉ email hợp lệ.',
+    'image' => 'Trường :attribute phải là hình ảnh.',
+    'max' => [
+        'array' => 'Trường :attribute không được vượt quá :max phần tử.',
+        'file' => 'Dung lượng :attribute không được vượt quá :max kilobytes.',
+        'numeric' => 'Trường :attribute không được vượt quá :max.',
+        'string' => 'Trường :attribute không được vượt quá :max ký tự.',
+    ],
+    'min' => [
+        'array' => 'Trường :attribute phải có ít nhất :min phần tử.',
+        'file' => 'Dung lượng :attribute phải ít nhất :min kilobytes.',
+        'numeric' => 'Trường :attribute phải ít nhất :min.',
+        'string' => 'Trường :attribute phải có ít nhất :min ký tự.',
+    ],
+    'password' => [
+        'letters' => 'Mật khẩu phải chứa ít nhất một chữ cái.',
+        'mixed' => 'Mật khẩu phải chứa ít nhất một chữ hoa và một chữ thường.',
+        'numbers' => 'Mật khẩu phải chứa ít nhất một số.',
+        'symbols' => 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt.',
+        'uncompromised' => 'Mật khẩu đã xuất hiện trong vụ rò rỉ dữ liệu.',
+    ],
+    'required' => 'Trường :attribute là bắt buộc.',
+    'string' => 'Trường :attribute phải là chuỗi ký tự.',
+    'unique' => 'Trường :attribute đã tồn tại.',
+    'attributes' => [
+        'name' => 'họ tên',
+        'email' => 'email',
+        'password' => 'mật khẩu',
+    ],
+];
