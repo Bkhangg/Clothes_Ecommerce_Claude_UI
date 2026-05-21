@@ -61,6 +61,10 @@
         @apply block w-full border border-secondary/20 bg-surface text-primary rounded-md px-4 py-3 text-sm font-body placeholder:text-secondary/50 focus:border-tertiary focus:ring-1 focus:ring-tertiary transition-colors;
     }
 
+    .input-field-lg {
+        @apply py-3.5 px-5 text-base;
+    }
+
     .input-label {
         @apply block font-label text-xs uppercase tracking-[0.08em] text-secondary mb-2;
     }

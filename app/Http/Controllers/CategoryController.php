@@ -39,6 +39,8 @@ class CategoryController extends Controller
 
         $categories = $query->orderBy($sortField, $sortDir)->paginate($perPage)->withQueryString();
 
+        session(['categories.index_url' => $request->fullUrl()]);
+
         return view('categories.index', compact('categories'));
     }
 
@@ -59,7 +61,7 @@ class CategoryController extends Controller
 
         Category::create($validated);
 
-        return to_route('categories.index')->with('toast', __('messages.category_created'));
+        return redirect(session('categories.index_url', route('categories.index')))->with('toast', __('messages.category_created'));
     }
 
     public function edit(Category $category)
@@ -79,7 +81,7 @@ class CategoryController extends Controller
 
         $category->update($validated);
 
-        return to_route('categories.index')->with('toast', __('messages.category_updated'));
+        return redirect(session('categories.index_url', route('categories.index')))->with('toast', __('messages.category_updated'));
     }
 
     public function destroy(Category $category)
@@ -90,7 +92,7 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return to_route('categories.index')->with('toast', __('messages.category_deleted'));
+        return redirect(session('categories.index_url', route('categories.index')))->with('toast', __('messages.category_deleted'));
     }
 
     public function bulkDestroy(Request $request)
@@ -100,6 +102,6 @@ class CategoryController extends Controller
         Category::whereIn('id', $ids)->delete();
 
         $count = count($ids);
-        return to_route('categories.index')->with('toast', __('messages.categories_deleted', ['count' => $count]));
+        return redirect(session('categories.index_url', route('categories.index')))->with('toast', __('messages.categories_deleted', ['count' => $count]));
     }
 }

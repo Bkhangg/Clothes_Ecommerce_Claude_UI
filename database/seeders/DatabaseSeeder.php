@@ -22,5 +22,13 @@ class DatabaseSeeder extends Seeder
         // Refresh categories with Vietnamese clothing data
         \App\Models\Category::query()->delete();
         \App\Models\Category::factory(25)->create();
+
+        // Refresh brands
+        \App\Models\Brand::query()->delete();
+        \App\Models\Brand::factory(15)->create();
+
+        // Create sample products
+        \App\Models\Product::query()->delete();
+        \App\Models\Product::factory(20)->create();
     }
 }
