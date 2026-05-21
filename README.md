@@ -41,8 +41,8 @@
 | **CKEditor** | Soạn thảo mô tả sản phẩm với heading, in đậm, in nghiêng, liên kết, bảng, danh sách |
 | **Select tìm kiếm** | Tìm kiếm danh mục/thương hiệu trong dropdown khi tạo/sửa sản phẩm |
 | **Xóa hàng loạt** | Chọn tất cả / bỏ chọn, xóa hàng loạt với modal xác nhận |
-| **Xác thực mật khẩu khi xóa** | Nhập password 1 lần mỗi session, các lần sau chỉ xác nhận |
-| **Toast thông báo** | Alpine.js toast với thanh progress, animation, tự động ẩn |
+| **Xác thực mật khẩu khi xóa** | Nhập mật khẩu 1 lần mỗi phiên, các lần sau chỉ xác nhận |
+| **Toast thông báo** | Thông báo toast bằng Alpine.js với thanh tiến trình, hiệu ứng, tự động ẩn |
 | **Chuyển ngôn ngữ** | Tiếng Anh / Tiếng Việt qua dropdown |
 | **Responsive** | Sidebar desktop + hamburger mobile |
 | **Định dạng tiền tệ** | VND với dấu chấm phân cách (VD: 2.750.000 ₫), helper `Currency::format()` |
@@ -74,14 +74,14 @@ Bo góc:  2px / 4px / 8px
 ## 🏗️ Kiến trúc
 
 ```
-routes/web.php             → Chuyển ngôn ngữ, danh mục, thương hiệu, sản phẩm (resource + bulk-delete), hồ sơ
+routes/web.php             → Chuyển ngôn ngữ, danh mục, thương hiệu, sản phẩm, hồ sơ
 app/Http/Controllers/      → CategoryController, BrandController, ProductController, ProfileController, LanguageController
 app/Http/Requests/         → StoreProductRequest, UpdateProductRequest
-app/Http/Middleware/       → SetLocale (ngôn ngữ theo session)
+app/Http/Middleware/       → SetLocale (ngôn ngữ theo phiên)
 app/Models/                → Category, Brand, Product, ProductImage
 app/Helpers/               → Currency.php (định dạng VND/USD)
-resources/views/           → Blade templates tổ chức theo tính năng
-lang/en/ & lang/vi/       → Toàn bộ UI strings + thông báo validation
+resources/views/           → Blade template tổ chức theo tính năng
+lang/en/ & lang/vi/       → Toàn bộ chuỗi UI + thông báo validation
 database/factories/        → CategoryFactory, BrandFactory, ProductFactory
 database/seeders/          → Admin user + 25 danh mục + 15 thương hiệu + 20 sản phẩm
 ```
@@ -90,9 +90,9 @@ database/seeders/          → Admin user + 25 danh mục + 15 thương hiệu +
 
 ```
 layouts/
-├── app.blade.php        # Layout đã xác thực (sidebar + top bar + nội dung)
+├── app.blade.php        # Layout đã xác thực (sidebar + thanh trên + nội dung)
 ├── guest.blade.php      # Layout khách (thẻ trung tâm + thương hiệu)
-└── navigation.blade.php # Sidebar + top bar với Alpine.js toggle
+└── navigation.blade.php # Sidebar + thanh trên với Alpine.js
 ```
 
 ### Component chính
@@ -176,13 +176,14 @@ php artisan serve
 
 | Trang | Xem trước |
 |-------|-----------|
-| **Đăng nhập** | `Sắp có — thêm ảnh chụp tại đây` |
-| **Dashboard** | `Sắp có — thêm ảnh chụp tại đây` |
-| **Danh mục** | `Sắp có — thêm ảnh chụp tại đây` |
-| **Sản phẩm (Desktop)** | `Sắp có — thêm ảnh chụp tại đây` |
-| **Sản phẩm (Mobile)** | `Sắp có — thêm ảnh chụp tại đây` |
-| **Thêm sản phẩm** | `Sắp có — thêm ảnh chụp tại đây` |
-| **Hồ sơ** | `Sắp có — thêm ảnh chụp tại đây` |
+| **Đăng nhập** | `Sắp có` |
+| **Dashboard** | `Sắp có` |
+| **Danh mục (Desktop)** | `Sắp có` |
+| **Danh mục (Mobile)** | `Sắp có` |
+| **Sản phẩm (Desktop)** | `Sắp có` |
+| **Sản phẩm (Mobile)** | `Sắp có` |
+| **Thêm sản phẩm** | `Sắp có` |
+| **Hồ sơ** | `Sắp có` |
 
 </details>
 
@@ -197,16 +198,16 @@ php artisan serve
 - [x] CRUD sản phẩm
 - [x] Gallery ảnh phụ (nhiều ảnh)
 - [x] CKEditor cho mô tả sản phẩm
-- [x] Searchable select cho danh mục/thương hiệu
+- [x] Select tìm kiếm cho danh mục/thương hiệu
 - [x] Lightbox gallery với điều hướng
 - [x] Định dạng VND với preview real-time
 - [x] Tìm kiếm / Lọc / Sắp xếp / Phân trang
 - [x] Xóa hàng loạt
-- [x] Xác thực mật khẩu khi xóa (1 lần/session)
+- [x] Xác thực mật khẩu khi xóa (1 lần/phiên)
 - [x] Toast thông báo
 - [x] Song ngữ EN/VI
-- [x] Responsive sidebar + top bar
-- [x] Custom 404 error page
+- [x] Responsive sidebar + thanh trên
+- [x] Trang lỗi 404 tùy chỉnh
 
 ---
 
@@ -214,8 +215,8 @@ php artisan serve
 
 <div align="center">
 
-| Frontend | Backend | Cơ sở dữ liệu | Công cụ |
-|----------|---------|---------------|---------|
+| Giao diện | Backend | Cơ sở dữ liệu | Công cụ |
+|-----------|---------|---------------|---------|
 | Blade  | Laravel 13 | MySQL 8 | Vite |
 | Tailwind CSS 4 | PHP 8.3 | | npm |
 | Alpine.js 3 | | | Composer |
