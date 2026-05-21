@@ -10,7 +10,7 @@
             @method('PUT')
 
             <div>
-                <label for="name" class="input-label">{{ __('messages.name') }}</label>
+                <label for="name" class="input-label">{{ __('messages.category_name') }}</label>
                 <input id="name" class="input-field" type="text" name="name" value="{{ old('name', $category->name) }}" required autofocus placeholder="{{ __('messages.category_name_placeholder') }}">
                 <x-input-error :messages="$errors->get('name')" />
             </div>

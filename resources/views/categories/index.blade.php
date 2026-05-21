@@ -78,7 +78,7 @@
                                class="w-4 h-4 rounded-sm border-secondary/30 text-tertiary focus:ring-tertiary">
                     </th>
                     <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4 w-[2%]">#</th>
-                    <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4 w-[25%]">{{ __('messages.name') }}</th>
+                    <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4 w-[25%]">{{ __('messages.category_name') }}</th>
                     <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4 w-[35%]">{{ __('messages.description') }}</th>
                     <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4 w-[15%]">{{ __('messages.status') }}</th>
                     <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 w-[20%]">{{ __('messages.actions') }}</th>

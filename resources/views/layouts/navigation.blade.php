@@ -30,9 +30,17 @@
                 <span>{{ __('messages.dashboard') }}</span>
             </x-nav-link>
 
-            <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.*')">
+            <x-nav-link href="{{ route('products.index') }}" :active="request()->routeIs('products.*')">
                 <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
+                <span class="flex-1">{{ __('messages.products') }}</span>
+                <span class="px-2 py-0.5 text-[10px] font-label uppercase tracking-[0.08em] rounded-full bg-neutral text-secondary/60">{{ \App\Models\Product::count() }}</span>
+            </x-nav-link>
+
+            <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.*')">
+                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
                 </svg>
                 <span class="flex-1">{{ __('messages.categories') }}</span>
                 <span class="px-2 py-0.5 text-[10px] font-label uppercase tracking-[0.08em] rounded-full bg-neutral text-secondary/60">{{ \App\Models\Category::count() }}</span>

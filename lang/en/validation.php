@@ -195,6 +195,24 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'name',
+        'email' => 'email',
+        'password' => 'password',
+        'current_password' => 'current password',
+        'category_name' => 'category name',
+        'product_name' => 'product name',
+        'description' => 'description',
+        'price' => 'price',
+        'sale_price' => 'sale price',
+        'sku' => 'SKU',
+        'stock' => 'stock',
+        'size' => 'size',
+        'color' => 'color',
+        'image' => 'image',
+        'is_active' => 'status',
+        'category_id' => 'category',
+        'brand_id' => 'brand',
+    ],
 
 ];

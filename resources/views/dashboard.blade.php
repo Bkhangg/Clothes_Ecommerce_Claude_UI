@@ -37,12 +37,26 @@
         <div class="card group hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300">
             <div class="flex items-start justify-between">
                 <div>
+                    <p class="font-label text-xs uppercase tracking-[0.08em] text-secondary mb-2">{{ __('messages.products') }}</p>
+                    <p class="font-display text-display text-primary">{{ \App\Models\Product::count() }}</p>
+                </div>
+                <span class="w-10 h-10 rounded-md bg-neutral flex items-center justify-center text-secondary/40 group-hover:bg-tertiary/5 group-hover:text-tertiary transition-colors duration-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                    </svg>
+                </span>
+            </div>
+        </div>
+
+        <div class="card group hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300">
+            <div class="flex items-start justify-between">
+                <div>
                     <p class="font-label text-xs uppercase tracking-[0.08em] text-secondary mb-2">{{ __('messages.categories') }}</p>
                     <p class="font-display text-display text-primary">{{ \App\Models\Category::count() }}</p>
                 </div>
                 <span class="w-10 h-10 rounded-md bg-neutral flex items-center justify-center text-secondary/40 group-hover:bg-tertiary/5 group-hover:text-tertiary transition-colors duration-300">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
                     </svg>
                 </span>
             </div>

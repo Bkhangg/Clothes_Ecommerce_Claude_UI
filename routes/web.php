@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,9 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('categories/bulk-delete', [CategoryController::class, 'bulkDestroy'])->name('categories.bulk-destroy');
     Route::resource('categories', CategoryController::class);
+
+    Route::delete('products/bulk-delete', [ProductController::class, 'bulkDestroy'])->name('products.bulk-destroy');
+    Route::resource('products', ProductController::class);
 });
 
 require __DIR__.'/auth.php';
