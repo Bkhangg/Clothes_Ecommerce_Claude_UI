@@ -38,8 +38,8 @@
 | **Thương hiệu** | Quản lý thương hiệu sản phẩm |
 | **Sản phẩm** | CRUD đầy đủ, tìm kiếm, lọc theo danh mục/thương hiệu/trạng thái, sắp xếp theo giá/tên/ngày |
 | **Ảnh sản phẩm** | Ảnh chính + gallery nhiều ảnh phụ, xem lightbox với điều hướng |
-| **CKEditor** | Soạn thảo mô tả sản phẩm với heading, bold, italic, link, table, bullet list |
-| **Searchable Select** | Tìm kiếm danh mục/thương hiệu trong dropdown khi tạo/sửa sản phẩm |
+| **CKEditor** | Soạn thảo mô tả sản phẩm với heading, in đậm, in nghiêng, liên kết, bảng, danh sách |
+| **Select tìm kiếm** | Tìm kiếm danh mục/thương hiệu trong dropdown khi tạo/sửa sản phẩm |
 | **Xóa hàng loạt** | Chọn tất cả / bỏ chọn, xóa hàng loạt với modal xác nhận |
 | **Xác thực mật khẩu khi xóa** | Nhập password 1 lần mỗi session, các lần sau chỉ xác nhận |
 | **Toast thông báo** | Alpine.js toast với thanh progress, animation, tự động ẩn |
@@ -74,24 +74,24 @@ Bo góc:  2px / 4px / 8px
 ## 🏗️ Kiến trúc
 
 ```
-routes/web.php             → Language switch, categories, brands, products (resource + bulk-delete), profile
+routes/web.php             → Chuyển ngôn ngữ, danh mục, thương hiệu, sản phẩm (resource + bulk-delete), hồ sơ
 app/Http/Controllers/      → CategoryController, BrandController, ProductController, ProfileController, LanguageController
 app/Http/Requests/         → StoreProductRequest, UpdateProductRequest
-app/Http/Middleware/       → SetLocale (session-based language)
+app/Http/Middleware/       → SetLocale (ngôn ngữ theo session)
 app/Models/                → Category, Brand, Product, ProductImage
-app/Helpers/               → Currency.php (format VND/USD)
+app/Helpers/               → Currency.php (định dạng VND/USD)
 resources/views/           → Blade templates tổ chức theo tính năng
-lang/en/ & lang/vi/       → Toàn bộ UI strings + validation messages
+lang/en/ & lang/vi/       → Toàn bộ UI strings + thông báo validation
 database/factories/        → CategoryFactory, BrandFactory, ProductFactory
-database/seeders/          → Admin user + 25 categories + 15 brands + 20 products
+database/seeders/          → Admin user + 25 danh mục + 15 thương hiệu + 20 sản phẩm
 ```
 
 ### Cấu trúc Layout
 
 ```
 layouts/
-├── app.blade.php        # Authenticated layout (sidebar + top bar + content)
-├── guest.blade.php      # Guest layout (centered card + brand)
+├── app.blade.php        # Layout đã xác thực (sidebar + top bar + nội dung)
+├── guest.blade.php      # Layout khách (thẻ trung tâm + thương hiệu)
 └── navigation.blade.php # Sidebar + top bar với Alpine.js toggle
 ```
 
@@ -100,12 +100,12 @@ layouts/
 ```
 components/
 ├── searchable-select.blade.php # Select có ô tìm kiếm (Alpine.js)
-├── nav-link.blade.php         # Nav link active với border trái
-├── lang-switcher.blade.php    # Dropdown địa cầu với flag + checkmark
-├── toast.blade.php            # Alpine toast với progress bar
-├── modal.blade.php            # Modal tái sử dụng với focus trap + Esc
-├── breadcrumbs.blade.php      # Breadcrumb với home icon + chevron
-├── tooltip.blade.php          # Tooltip hover với arrow + transition
+├── nav-link.blade.php         # Link điều hướng active có border trái
+├── lang-switcher.blade.php    # Dropdown chuyển ngôn ngữ
+├── toast.blade.php            # Thông báo toast Alpine với thanh tiến trình
+├── modal.blade.php            # Modal dùng lại với focus trap + Esc
+├── breadcrumbs.blade.php      # Breadcrumb với icon home + chevron
+├── tooltip.blade.php          # Tooltip hover với mũi tên + hiệu ứng
 └── ...
 ```
 
@@ -113,8 +113,8 @@ components/
 
 ```
 products/
-├── index.blade.php          # Danh sách: table (desktop) + cards (mobile), bulk actions, gallery lightbox
-├── create.blade.php         # Form thêm: sections, gallery upload, CKEditor
+├── index.blade.php          # Danh sách: bảng (desktop) + thẻ (mobile), thao tác hàng loạt, lightbox gallery
+├── create.blade.php         # Form thêm: các khu vực, upload gallery, CKEditor
 ├── edit.blade.php           # Form sửa: gallery hiện có + upload mới, CKEditor
 └── partials/
     └── empty-state.blade.php # Trạng thái rỗng
@@ -170,19 +170,19 @@ php artisan serve
 ## 📸 Ảnh chụp màn hình
 
 <details>
-<summary>🖥️ Nhấn để xem ảnh chụp</summary>
+<summary>🖥️ Bấm để xem ảnh chụp</summary>
 
 <br>
 
 | Trang | Xem trước |
 |-------|-----------|
-| **Đăng nhập** | `Coming soon — thêm ảnh chụp tại đây` |
-| **Dashboard** | `Coming soon — thêm ảnh chụp tại đây` |
-| **Danh mục** | `Coming soon — thêm ảnh chụp tại đây` |
-| **Sản phẩm (Desktop)** | `Coming soon — thêm ảnh chụp tại đây` |
-| **Sản phẩm (Mobile)** | `Coming soon — thêm ảnh chụp tại đây` |
-| **Thêm sản phẩm** | `Coming soon — thêm ảnh chụp tại đây` |
-| **Hồ sơ** | `Coming soon — thêm ảnh chụp tại đây` |
+| **Đăng nhập** | `Sắp có — thêm ảnh chụp tại đây` |
+| **Dashboard** | `Sắp có — thêm ảnh chụp tại đây` |
+| **Danh mục** | `Sắp có — thêm ảnh chụp tại đây` |
+| **Sản phẩm (Desktop)** | `Sắp có — thêm ảnh chụp tại đây` |
+| **Sản phẩm (Mobile)** | `Sắp có — thêm ảnh chụp tại đây` |
+| **Thêm sản phẩm** | `Sắp có — thêm ảnh chụp tại đây` |
+| **Hồ sơ** | `Sắp có — thêm ảnh chụp tại đây` |
 
 </details>
 
@@ -214,8 +214,8 @@ php artisan serve
 
 <div align="center">
 
-| Frontend | Backend | Database | Tooling |
-|----------|---------|----------|---------|
+| Frontend | Backend | Cơ sở dữ liệu | Công cụ |
+|----------|---------|---------------|---------|
 | Blade  | Laravel 13 | MySQL 8 | Vite |
 | Tailwind CSS 4 | PHP 8.3 | | npm |
 | Alpine.js 3 | | | Composer |
@@ -232,7 +232,7 @@ Dự án được cấp phép dưới [MIT license](https://opensource.org/licen
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by BKhanggDesu</sub>
+  <sub>Xây dựng với ❤️ bởi BKhanggDesu</sub>
   <br>
   <sub>Powered by Laravel + Claude AI</sub>
 </div>
