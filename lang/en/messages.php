@@ -177,4 +177,5 @@ return [
     'confirm_bulk_delete_employee_desc' => 'employees will be permanently deleted. This action cannot be undone.',
     'leave_blank' => 'leave blank to keep current',
     'cannot_delete_admin' => 'Cannot delete admin users.',
+    'account_disabled' => 'Your account has been disabled. Please contact administrator.',
 ];

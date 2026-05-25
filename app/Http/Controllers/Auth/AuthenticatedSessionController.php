@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,10 +27,19 @@ class AuthenticatedSessionController extends Controller
             return back()->with('toast_error', $error);
         }
 
+        $user = Auth::user();
+
+        if ($user->role === 'employee' && !$user->is_active) {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return back()->with('toast_error', __('messages.account_disabled'));
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard', absolute: false))
-            ->with('toast', __('messages.welcome_back_toast', ['name' => Auth::user()->name]));
+            ->with('toast', __('messages.welcome_back_toast', ['name' => $user->name]));
     }
 
     public function destroy(Request $request): RedirectResponse

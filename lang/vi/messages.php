@@ -177,4 +177,5 @@ return [
     'confirm_bulk_delete_employee_desc' => 'nhân viên sẽ bị xóa vĩnh viễn. Hành động này không thể hoàn tác.',
     'leave_blank' => 'để trống nếu không đổi',
     'cannot_delete_admin' => 'Không thể xóa tài khoản quản trị.',
+    'account_disabled' => 'Tài khoản của bạn đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.',
 ];

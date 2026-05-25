@@ -48,6 +48,7 @@
             </div>
         </div>
 
+        @can('manage-employees')
         <div class="card group hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300">
             <div class="flex items-start justify-between">
                 <div>
@@ -61,6 +62,7 @@
                 </span>
             </div>
         </div>
+        @endcan
     </div>
 
     <div class="card hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300">
