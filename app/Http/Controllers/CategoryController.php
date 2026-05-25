@@ -4,10 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (auth()->check()) {
+                Gate::authorize('manage-categories');
+            }
+            return $next($request);
+        });
+    }
+
     public function index(Request $request)
     {
         $query = Category::query();

@@ -1,14 +1,14 @@
 <div align="center">
   <h1>BKhanggDesu — Clothes E-commerce Claude UI</h1>
   <p align="center">
-    Ứng dụng web Laravel quản lý danh mục sản phẩm thời trang.<br>
+    Ứng dụng web Laravel quản lý sản phẩm thời trang.<br>
     Xây dựng với <strong>Heritage</strong> design system — phong cách flat, tối giản, đề cao typography.<br>
     Hỗ trợ song ngữ Anh — Việt.
   </p>
 
   <p align="center">
-    Dự án là admin panel nền tảng cho website bán quần áo thương mại điện tử,<br>
-    bao gồm xác thực người dùng, quản lý danh mục sản phẩm và hệ thống UI chỉn chu sẵn sàng mở rộng.
+    Admin panel cho website bán quần áo thương mại điện tử,<br>
+    bao gồm xác thực người dùng, quản lý danh mục, thương hiệu, sản phẩm và hệ thống UI chỉn chu.
   </p>
 
   <p>
@@ -28,176 +28,227 @@
 
 ---
 
-## ✨ Features
+## ✨ Tính năng
 
-| Area | Details |
-|------|---------|
-| **Authentication** | Login, Register, Password Reset, Email Verification, Confirm Password |
-| **Profile Management** | Update name/email, change password, delete account with confirmation |
-| **Category CRUD** | Full Create / Read / Update / Delete with search, filter, sort & paginate |
-| **Bulk Operations** | Select all / deselect, bulk delete with confirmation modal |
-| **Toast Notifications** | Alpine.js-powered toast with progress bar, bounce animation, auto-dismiss |
-| **Language Switch** | English / Vietnamese via live globe dropdown |
-| **Responsive Design** | Desktop sidebar + mobile off-canvas hamburger navigation |
+| Khu vực | Chi tiết |
+|---------|----------|
+| **Xác thực** | Đăng nhập, Đăng ký, Quên mật khẩu, Xác thực email, Xác nhận mật khẩu |
+| **Quản lý hồ sơ** | Cập nhật tên/email, đổi mật khẩu, xóa tài khoản |
+| **Danh mục** | CRUD đầy đủ với tìm kiếm, lọc, sắp xếp, phân trang |
+| **Thương hiệu** | Quản lý thương hiệu sản phẩm |
+| **Sản phẩm** | CRUD đầy đủ, tìm kiếm, lọc theo danh mục/thương hiệu/trạng thái, sắp xếp theo giá/tên/ngày |
+| **Ảnh sản phẩm** | Ảnh chính + gallery nhiều ảnh phụ, xem lightbox với điều hướng |
+| **CKEditor** | Soạn thảo mô tả sản phẩm với heading, in đậm, in nghiêng, liên kết, bảng, danh sách |
+| **Select tìm kiếm** | Tìm kiếm danh mục/thương hiệu trong dropdown khi tạo/sửa sản phẩm |
+| **Quản lý nhân viên** | CRUD nhân viên với role (admin/employee), phân quyền theo Gate |
+| **Phân quyền (Gate)** | Nhân viên bị giới hạn quyền theo role, admin toàn quyền |
+| **Xóa hàng loạt** | Chọn tất cả / bỏ chọn, xóa hàng loạt với modal xác nhận |
+| **Xác thực mật khẩu khi xóa** | Nhập mật khẩu 1 lần mỗi phiên, các lần sau chỉ xác nhận |
+| **Toast thông báo** | Thông báo toast bằng Alpine.js với thanh tiến trình, hiệu ứng, tự động ẩn |
+| **Chuyển ngôn ngữ** | Tiếng Anh / Tiếng Việt qua dropdown |
+| **Responsive** | Sidebar desktop + hamburger mobile |
+| **Định dạng tiền tệ** | VND với dấu chấm phân cách (VD: 2.750.000 ₫), helper `Currency::format()` |
 
 ---
 
 ## 🎨 Heritage Design System
 
-A flat, minimal design built around typography and restrained accent use.
+Phong cách flat, tối giản, xoay quanh typography và điểm nhấn màu sắc hạn chế.
 
 ```yaml
-Colors:
-  primary:   '#1A1C1E'   # Rich black
-  secondary: '#6C7278'   # Warm gray
-  tertiary:  '#B8422E'   # Burnt orange (single accent)
-  neutral:   '#F7F5F2'   # Warm off-white
-  surface:   '#FFFFFF'   # White
+Màu sắc:
+  primary:   '#1A1C1E'   # Đen đậm
+  secondary: '#6C7278'   # Xám ấm
+  tertiary:  '#B8422E'   # Cam đỏ (điểm nhấn duy nhất)
+  neutral:   '#F7F5F2'   # Trắng kem ấm
+  surface:   '#FFFFFF'   # Trắng
 
 Typography:
-  display: 'Fraunces'     # Serif for h1 / large headings
-  body:    'Public Sans'  # Sans-serif for paragraphs
-  label:   'Space Grotesk' # Monoline for labels / uppercase
+  display: 'Fraunces'     # Serif cho h1 / heading lớn
+  body:    'Public Sans'  # Sans-serif cho đoạn văn
+  label:   'Space Grotesk' # Monoline cho nhãn / chữ hoa
 
-Radius:    2px / 4px / 8px
+Bo góc:  2px / 4px / 8px
 ```
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Kiến trúc
 
 ```
-routes/web.php          → Language switch, categories (resource + bulk-delete), profile
-app/Http/Controllers/   → CategoryController, ProfileController, LanguageController
-app/Http/Middleware/     → SetLocale (session-based language)
-resources/views/         → Blade templates organized by feature
-lang/en/ & lang/vi/     → All UI strings translated
-database/factories/      → CategoryFactory (50 Vietnamese clothing categories)
-database/seeders/        → Admin user + 25 seed categories
+routes/web.php             → Chuyển ngôn ngữ, danh mục, thương hiệu, sản phẩm, nhân viên, hồ sơ
+app/Http/Controllers/      → CategoryController, BrandController, ProductController, EmployeeController, ProfileController, LanguageController
+app/Http/Requests/         → StoreProductRequest, UpdateProductRequest
+app/Http/Middleware/       → SetLocale (ngôn ngữ theo phiên)
+app/Providers/             → AppServiceProvider (Gates: manage-products, manage-categories, manage-employees)
+app/Models/                → Category, Brand, Product, ProductImage, User (role + is_active)
+app/Helpers/               → Currency.php (định dạng VND/USD)
+resources/views/           → Blade template tổ chức theo tính năng
+lang/en/ & lang/vi/       → Toàn bộ chuỗi UI + thông báo validation
+database/factories/        → CategoryFactory, BrandFactory, ProductFactory
+database/seeders/          → Admin user + 25 danh mục + 15 thương hiệu + 20 sản phẩm
 ```
 
-### Layout Structure
+### Cấu trúc Layout
 
 ```
 layouts/
-├── app.blade.php        # Authenticated layout (sidebar + top bar + content)
-├── guest.blade.php      # Guest layout (centered card + brand)
-└── navigation.blade.php # Sidebar + top bar with Alpine.js toggle
+├── app.blade.php        # Layout đã xác thực (sidebar + thanh trên + nội dung)
+├── guest.blade.php      # Layout khách (thẻ trung tâm + thương hiệu)
+└── navigation.blade.php # Sidebar + thanh trên với Alpine.js
 ```
 
-### Key Components
+### Component chính
 
 ```
 components/
-├── nav-link.blade.php      # Active nav link with left border indicator
-├── lang-switcher.blade.php # Globe dropdown with flag + checkmark
-├── toast.blade.php         # Alpine toast with progress bar
-├── modal.blade.php         # Reusable modal with focus trap + Esc close
-├── breadcrumbs.blade.php   # Breadcrumb nav with home icon + chevrons
-├── tooltip.blade.php       # Hover tooltip with arrow + transitions
+├── searchable-select.blade.php # Select có ô tìm kiếm (Alpine.js)
+├── nav-link.blade.php         # Link điều hướng active có border trái
+├── lang-switcher.blade.php    # Dropdown chuyển ngôn ngữ
+├── toast.blade.php            # Thông báo toast Alpine với thanh tiến trình
+├── modal.blade.php            # Modal dùng lại với focus trap + Esc
+├── breadcrumbs.blade.php      # Breadcrumb với icon home + chevron
+├── tooltip.blade.php          # Tooltip hover với mũi tên + hiệu ứng
 └── ...
+```
+
+### Cấu trúc Products
+
+```
+products/
+├── index.blade.php          # Danh sách: bảng (desktop) + thẻ (mobile), thao tác hàng loạt, lightbox gallery
+├── create.blade.php         # Form thêm: các khu vực, upload gallery, CKEditor
+├── edit.blade.php           # Form sửa: gallery hiện có + upload mới, CKEditor
+└── partials/
+    └── empty-state.blade.php # Trạng thái rỗng
+
+### Cấu trúc Employees
+
+```
+employees/
+├── index.blade.php          # Danh sách: bảng (desktop) + thẻ (mobile), thao tác hàng loạt
+├── create.blade.php         # Form thêm nhân viên
+├── edit.blade.php           # Form sửa nhân viên (kèm active/inactive)
+└── partials/
+    └── empty-state.blade.php # Trạng thái rỗng
+```
 ```
 
 ---
 
-## 🚀 Installation
+## 🚀 Cài đặt
 
 ```bash
-# 1. Clone the repository
+# 1. Clone repository
 git clone https://github.com/Bkhangg/Clothes_Ecommerce_Claude_UI.git
 cd Clothes_Ecommerce_Claude_UI
 
-# 2. Install dependencies
+# 2. Cài dependencies
 composer install
 npm install
 
-# 3. Environment setup
+# 3. Cấu hình môi trường
 cp .env.example .env
 php artisan key:generate
 
-# 4. Configure database in .env
+# 4. Cấu hình database trong .env
 DB_DATABASE=loginpagemd
 DB_USERNAME=root
 DB_PASSWORD=
 
-# 5. Run migrations & seeders
+# 5. Chạy migration & seeder
 php artisan migrate
 php artisan db:seed
 
-# 6. Build frontend assets
+# 6. Tạo storage link
+php artisan storage:link
+
+# 7. Build frontend
 npm run build
 
-# 7. Serve
+# 8. Chạy server
 php artisan serve
 ```
 
-### Default Admin Account
+### Tài khoản Admin mặc định
 
-| Field    | Value              |
-|----------|--------------------|
-| Email    | `admin@bkdesu.com` |
-| Password | `password`         |
+| Trường   | Giá trị             |
+|----------|---------------------|
+| Email    | `admin@bkdesu.com`  |
+| Mật khẩu | `password`          |
 
-> The seeder creates this account automatically if it doesn't exist.
+> Seeder tự động tạo tài khoản này nếu chưa tồn tại.
 
 ---
 
-## 📸 Screenshots
+## 📸 Ảnh chụp màn hình
 
 <details>
-<summary>🖥️ Click to expand screenshots</summary>
+<summary>🖥️ Bấm để xem ảnh chụp</summary>
 
 <br>
 
-| Page | Preview |
-|------|---------|
-| **Login** | `Coming soon — add your screenshots here` |
-| **Dashboard** | `Coming soon — add your screenshots here` |
-| **Categories (Desktop)** | `Coming soon — add your screenshots here` |
-| **Categories (Mobile)** | `Coming soon — add your screenshots here` |
-| **Profile** | `Coming soon — add your screenshots here` |
+| Trang | Xem trước |
+|-------|-----------|
+| **Đăng nhập** | `Sắp có` |
+| **Dashboard** | `Sắp có` |
+| **Danh mục (Desktop)** | `Sắp có` |
+| **Danh mục (Mobile)** | `Sắp có` |
+| **Sản phẩm (Desktop)** | `Sắp có` |
+| **Sản phẩm (Mobile)** | `Sắp có` |
+| **Thêm sản phẩm** | `Sắp có` |
+| **Hồ sơ** | `Sắp có` |
 
 </details>
 
 ---
 
-## 🧭 Roadmap
+## 🧭 Lộ trình
 
-- [x] Authentication scaffold (Breeze Blade)
-- [x] Profile management
-- [x] Category CRUD
-- [x] Search / Filter / Sort / Paginate
-- [x] Bulk delete
-- [x] Toast notifications
-- [x] Delete confirmation modal with password
-- [x] Bilingual EN/VI
-- [x] Responsive sidebar + top bar
-- [x] Custom 404 error page
+- [x] Xác thực (Breeze Blade)
+- [x] Quản lý hồ sơ
+- [x] CRUD danh mục
+- [x] CRUD thương hiệu
+- [x] CRUD sản phẩm
+- [x] Quản lý nhân viên (feature flag, role admin/employee, Gate phân quyền)
+- [x] Gallery ảnh phụ (nhiều ảnh)
+- [x] CKEditor cho mô tả sản phẩm
+- [x] Select tìm kiếm cho danh mục/thương hiệu
+- [x] Lightbox gallery với điều hướng
+- [x] Định dạng VND với preview real-time
+- [x] Tìm kiếm / Lọc / Sắp xếp / Phân trang
+- [x] Xóa hàng loạt
+- [x] Xác thực mật khẩu khi xóa (1 lần/phiên)
+- [x] Toast thông báo
+- [x] Song ngữ EN/VI
+- [x] Responsive sidebar + thanh trên
+- [x] Trang lỗi 404 tùy chỉnh
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Công nghệ
 
 <div align="center">
 
-| Frontend | Backend | Database | Tooling |
-|----------|---------|----------|---------|
+| Giao diện | Backend | Cơ sở dữ liệu | Công cụ |
+|-----------|---------|---------------|---------|
 | Blade  | Laravel 13 | MySQL 8 | Vite |
 | Tailwind CSS 4 | PHP 8.3 | | npm |
 | Alpine.js 3 | | | Composer |
+| CKEditor 5 | | | |
 
 </div>
 
 ---
 
-## 📄 License
+## 📄 Giấy phép
 
-This project is open-sourced under the [MIT license](https://opensource.org/licenses/MIT).
+Dự án được cấp phép dưới [MIT license](https://opensource.org/licenses/MIT).
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by BKhanggDesu</sub>
+  <sub>Xây dựng với ❤️ bởi BKhanggDesu</sub>
   <br>
   <sub>Powered by Laravel + Claude AI</sub>
 </div>

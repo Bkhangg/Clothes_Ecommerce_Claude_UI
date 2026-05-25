@@ -9,11 +9,22 @@ use App\Models\ProductImage;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (auth()->check()) {
+                Gate::authorize('manage-products');
+            }
+            return $next($request);
+        });
+    }
+
     public function index(Request $request)
     {
         $query = Product::with(['category', 'brand']);
