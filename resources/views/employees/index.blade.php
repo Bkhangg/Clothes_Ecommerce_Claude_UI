@@ -78,6 +78,7 @@
                     <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4">{{ __('messages.name') }}</th>
                     <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4">{{ __('messages.email') }}</th>
                     <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4">{{ __('messages.status') }}</th>
+                    <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3 pr-4">{{ __('messages.permissions') }}</th>
                     <th class="font-label text-xs uppercase tracking-[0.08em] text-secondary pb-3">{{ __('messages.actions') }}</th>
                 </tr>
             </thead>
@@ -96,6 +97,16 @@
                             <span class="font-label text-xs uppercase tracking-[0.08em] {{ $employee->is_active ? 'text-tertiary' : 'text-secondary' }}">
                                 {{ $employee->is_active ? __('messages.active') : __('messages.inactive') }}
                             </span>
+                        </td>
+                        <td class="py-3 pr-4 align-middle">
+                            <div class="flex flex-wrap gap-1">
+                                @foreach ($employee->permissions ?? [] as $perm)
+                                    <span class="inline-block px-2 py-0.5 text-[10px] font-label uppercase tracking-[0.06em] rounded-full bg-neutral text-secondary/70">{{ __("messages.perm_$perm") }}</span>
+                                @endforeach
+                                @if (empty($employee->permissions))
+                                    <span class="text-xs text-secondary/40">—</span>
+                                @endif
+                            </div>
                         </td>
                         <td class="py-3 align-middle">
                             <div class="flex items-center gap-1">
@@ -116,7 +127,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="py-0">
+                        <td colspan="7" class="py-0">
                             @include('employees.partials.empty-state')
                         </td>
                     </tr>
@@ -139,6 +150,11 @@
                     </span>
                 </div>
                 <p class="text-xs text-secondary mb-3 ml-6">{{ $employee->email }}</p>
+                <div class="flex flex-wrap gap-1 mb-3 ml-6">
+                    @foreach ($employee->permissions ?? [] as $perm)
+                        <span class="inline-block px-2 py-0.5 text-[10px] font-label uppercase tracking-[0.06em] rounded-full bg-neutral text-secondary/70">{{ __("messages.perm_$perm") }}</span>
+                    @endforeach
+                </div>
                 <div class="flex items-center gap-2 pt-3 border-t border-secondary/10 ml-6">
                     <a href="{{ route('employees.edit', $employee) }}" title="{{ __('messages.edit_employee') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-secondary hover:text-primary hover:bg-neutral rounded-sm transition-colors">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
