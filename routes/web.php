@@ -28,8 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('products/bulk-delete', [ProductController::class, 'bulkDestroy'])->name('products.bulk-destroy');
     Route::resource('products', ProductController::class);
 
-    Route::delete('employees/bulk-destroy', [EmployeeController::class, 'bulkDestroy'])->name('employees.bulk-destroy')->middleware('employee.enabled');
-    Route::resource('employees', EmployeeController::class)->middleware('employee.enabled');
+    Route::delete('employees/bulk-destroy', [EmployeeController::class, 'bulkDestroy'])->name('employees.bulk-destroy');
+    Route::resource('employees', EmployeeController::class);
 });
 
 require __DIR__.'/auth.php';

@@ -48,7 +48,6 @@
             </div>
         </div>
 
-        @if (config('app.employee_management'))
         <div class="card group hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300">
             <div class="flex items-start justify-between">
                 <div>
@@ -62,7 +61,6 @@
                 </span>
             </div>
         </div>
-        @endif
     </div>
 
     <div class="card hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300">

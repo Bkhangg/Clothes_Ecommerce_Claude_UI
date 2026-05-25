@@ -40,7 +40,7 @@
 | **Ảnh sản phẩm** | Ảnh chính + gallery nhiều ảnh phụ, xem lightbox với điều hướng |
 | **CKEditor** | Soạn thảo mô tả sản phẩm với heading, in đậm, in nghiêng, liên kết, bảng, danh sách |
 | **Select tìm kiếm** | Tìm kiếm danh mục/thương hiệu trong dropdown khi tạo/sửa sản phẩm |
-| **Quản lý nhân viên** | CRUD nhân viên với role (admin/employee), bật/tắt qua feature flag `EMPLOYEE_MANAGEMENT` |
+| **Quản lý nhân viên** | CRUD nhân viên với role (admin/employee), phân quyền theo Gate |
 | **Phân quyền (Gate)** | Nhân viên bị giới hạn quyền theo role, admin toàn quyền |
 | **Xóa hàng loạt** | Chọn tất cả / bỏ chọn, xóa hàng loạt với modal xác nhận |
 | **Xác thực mật khẩu khi xóa** | Nhập mật khẩu 1 lần mỗi phiên, các lần sau chỉ xác nhận |
@@ -79,7 +79,7 @@ Bo góc:  2px / 4px / 8px
 routes/web.php             → Chuyển ngôn ngữ, danh mục, thương hiệu, sản phẩm, nhân viên, hồ sơ
 app/Http/Controllers/      → CategoryController, BrandController, ProductController, EmployeeController, ProfileController, LanguageController
 app/Http/Requests/         → StoreProductRequest, UpdateProductRequest
-app/Http/Middleware/       → SetLocale (ngôn ngữ theo phiên), EnsureEmployeeEnabled (feature flag)
+app/Http/Middleware/       → SetLocale (ngôn ngữ theo phiên)
 app/Providers/             → AppServiceProvider (Gates: manage-products, manage-categories, manage-employees)
 app/Models/                → Category, Brand, Product, ProductImage, User (role + is_active)
 app/Helpers/               → Currency.php (định dạng VND/USD)
@@ -155,9 +155,6 @@ php artisan key:generate
 DB_DATABASE=loginpagemd
 DB_USERNAME=root
 DB_PASSWORD=
-
-# Bật/tắt quản lý nhân viên
-EMPLOYEE_MANAGEMENT=false
 
 # 5. Chạy migration & seeder
 php artisan migrate

@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            if (config('app.employee_management')) {
+            if (auth()->check()) {
                 Gate::authorize('manage-products');
             }
             return $next($request);
