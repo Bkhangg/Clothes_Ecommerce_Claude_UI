@@ -40,6 +40,8 @@
 | **Ảnh sản phẩm** | Ảnh chính + gallery nhiều ảnh phụ, xem lightbox với điều hướng |
 | **CKEditor** | Soạn thảo mô tả sản phẩm với heading, in đậm, in nghiêng, liên kết, bảng, danh sách |
 | **Select tìm kiếm** | Tìm kiếm danh mục/thương hiệu trong dropdown khi tạo/sửa sản phẩm |
+| **Quản lý nhân viên** | CRUD nhân viên với role (admin/employee), bật/tắt qua feature flag `EMPLOYEE_MANAGEMENT` |
+| **Phân quyền (Gate)** | Nhân viên bị giới hạn quyền theo role, admin toàn quyền |
 | **Xóa hàng loạt** | Chọn tất cả / bỏ chọn, xóa hàng loạt với modal xác nhận |
 | **Xác thực mật khẩu khi xóa** | Nhập mật khẩu 1 lần mỗi phiên, các lần sau chỉ xác nhận |
 | **Toast thông báo** | Thông báo toast bằng Alpine.js với thanh tiến trình, hiệu ứng, tự động ẩn |
@@ -74,11 +76,12 @@ Bo góc:  2px / 4px / 8px
 ## 🏗️ Kiến trúc
 
 ```
-routes/web.php             → Chuyển ngôn ngữ, danh mục, thương hiệu, sản phẩm, hồ sơ
-app/Http/Controllers/      → CategoryController, BrandController, ProductController, ProfileController, LanguageController
+routes/web.php             → Chuyển ngôn ngữ, danh mục, thương hiệu, sản phẩm, nhân viên, hồ sơ
+app/Http/Controllers/      → CategoryController, BrandController, ProductController, EmployeeController, ProfileController, LanguageController
 app/Http/Requests/         → StoreProductRequest, UpdateProductRequest
-app/Http/Middleware/       → SetLocale (ngôn ngữ theo phiên)
-app/Models/                → Category, Brand, Product, ProductImage
+app/Http/Middleware/       → SetLocale (ngôn ngữ theo phiên), EnsureEmployeeEnabled (feature flag)
+app/Providers/             → AppServiceProvider (Gates: manage-products, manage-categories, manage-employees)
+app/Models/                → Category, Brand, Product, ProductImage, User (role + is_active)
 app/Helpers/               → Currency.php (định dạng VND/USD)
 resources/views/           → Blade template tổ chức theo tính năng
 lang/en/ & lang/vi/       → Toàn bộ chuỗi UI + thông báo validation
@@ -118,6 +121,17 @@ products/
 ├── edit.blade.php           # Form sửa: gallery hiện có + upload mới, CKEditor
 └── partials/
     └── empty-state.blade.php # Trạng thái rỗng
+
+### Cấu trúc Employees
+
+```
+employees/
+├── index.blade.php          # Danh sách: bảng (desktop) + thẻ (mobile), thao tác hàng loạt
+├── create.blade.php         # Form thêm nhân viên
+├── edit.blade.php           # Form sửa nhân viên (kèm active/inactive)
+└── partials/
+    └── empty-state.blade.php # Trạng thái rỗng
+```
 ```
 
 ---
@@ -141,6 +155,9 @@ php artisan key:generate
 DB_DATABASE=loginpagemd
 DB_USERNAME=root
 DB_PASSWORD=
+
+# Bật/tắt quản lý nhân viên
+EMPLOYEE_MANAGEMENT=false
 
 # 5. Chạy migration & seeder
 php artisan migrate
@@ -196,6 +213,7 @@ php artisan serve
 - [x] CRUD danh mục
 - [x] CRUD thương hiệu
 - [x] CRUD sản phẩm
+- [x] Quản lý nhân viên (feature flag, role admin/employee, Gate phân quyền)
 - [x] Gallery ảnh phụ (nhiều ảnh)
 - [x] CKEditor cho mô tả sản phẩm
 - [x] Select tìm kiếm cho danh mục/thương hiệu

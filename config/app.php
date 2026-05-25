@@ -17,6 +17,8 @@ return [
 
     'currency' => env('APP_CURRENCY', 'VND'),
 
+    'employee_management' => env('EMPLOYEE_MANAGEMENT', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
