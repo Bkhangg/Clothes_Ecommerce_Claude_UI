@@ -15,20 +15,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        Gate::define('manage-products', function (User $user) {
-            return $user->role === 'admin' || ($user->role === 'employee' && $user->is_active);
-        });
-
-        Gate::define('manage-categories', function (User $user) {
-            return $user->role === 'admin' || ($user->role === 'employee' && $user->is_active);
-        });
-
-        Gate::define('manage-employees', function (User $user) {
-            return $user->role === 'admin';
-        });
-
-        Gate::define('manage-orders', function (User $user) {
-            return $user->role === 'admin' || ($user->role === 'employee' && $user->is_active);
-        });
+        Gate::define('manage-products', fn(User $user) => $user->hasPermission('manage-products'));
+        Gate::define('manage-categories', fn(User $user) => $user->hasPermission('manage-categories'));
+        Gate::define('manage-employees', fn(User $user) => $user->hasPermission('manage-employees'));
+        Gate::define('manage-brands', fn(User $user) => $user->hasPermission('manage-brands'));
+        Gate::define('manage-orders', fn(User $user) => $user->hasPermission('manage-orders'));
     }
 }

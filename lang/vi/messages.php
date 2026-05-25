@@ -178,4 +178,9 @@ return [
     'leave_blank' => 'để trống nếu không đổi',
     'cannot_delete_admin' => 'Không thể xóa tài khoản quản trị.',
     'account_disabled' => 'Tài khoản của bạn đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.',
+    'permissions' => 'Quyền hạn',
+    'perm_manage-products' => 'Quản lý sản phẩm',
+    'perm_manage-categories' => 'Quản lý danh mục',
+    'perm_manage-brands' => 'Quản lý thương hiệu',
+    'perm_manage-orders' => 'Quản lý đơn hàng',
 ];

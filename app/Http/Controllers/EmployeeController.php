@@ -10,6 +10,13 @@ use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
+    private array $availablePermissions = [
+        'manage-products',
+        'manage-categories',
+        'manage-brands',
+        'manage-orders',
+    ];
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -58,7 +65,9 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('employees.create');
+        return view('employees.create', [
+            'availablePermissions' => $this->availablePermissions,
+        ]);
     }
 
     public function store(Request $request)
@@ -67,6 +76,8 @@ class EmployeeController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'permissions' => ['nullable', 'array'],
+            'permissions.*' => ['string', Rule::in($this->availablePermissions)],
         ]);
 
         User::create([
@@ -75,6 +86,7 @@ class EmployeeController extends Controller
             'password' => Hash::make($validated['password']),
             'role' => 'employee',
             'is_active' => true,
+            'permissions' => $validated['permissions'] ?? [],
         ]);
 
         return redirect(session('employees.index_url', route('employees.index')))
@@ -83,7 +95,10 @@ class EmployeeController extends Controller
 
     public function edit(User $employee)
     {
-        return view('employees.edit', compact('employee'));
+        return view('employees.edit', [
+            'employee' => $employee,
+            'availablePermissions' => $this->availablePermissions,
+        ]);
     }
 
     public function update(Request $request, User $employee)
@@ -93,6 +108,8 @@ class EmployeeController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users', 'email')->ignore($employee->id)],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'is_active' => ['boolean'],
+            'permissions' => ['nullable', 'array'],
+            'permissions.*' => ['string', Rule::in($this->availablePermissions)],
         ]);
 
         $employee->name = $validated['name'];
@@ -103,6 +120,7 @@ class EmployeeController extends Controller
         }
 
         $employee->is_active = $request->boolean('is_active');
+        $employee->permissions = $validated['permissions'] ?? [];
         $employee->save();
 
         return redirect(session('employees.index_url', route('employees.index')))

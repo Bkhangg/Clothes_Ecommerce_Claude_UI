@@ -32,6 +32,21 @@
                 <x-input-error :messages="$errors->get('password_confirmation')" />
             </div>
 
+            <div class="mt-6 pt-5 border-t border-secondary/10">
+                <p class="font-label text-xs uppercase tracking-[0.08em] text-secondary mb-3">{{ __('messages.permissions') }}</p>
+                <div class="space-y-2.5">
+                    @foreach ($availablePermissions as $perm)
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input type="checkbox" name="permissions[]" value="{{ $perm }}"
+                               {{ in_array($perm, old('permissions', [])) ? 'checked' : '' }}
+                               class="w-4 h-4 rounded-sm border-secondary/30 text-tertiary focus:ring-tertiary">
+                        <span class="text-sm text-primary group-hover:text-tertiary transition-colors">{{ __("messages.perm_$perm") }}</span>
+                    </label>
+                    @endforeach
+                </div>
+                <x-input-error :messages="$errors->get('permissions')" />
+            </div>
+
             <div class="flex items-center gap-4 mt-8 pt-6 border-t border-secondary/10">
                 <button type="submit" class="btn-primary" :disabled="loading">
                     <span x-show="!loading">{{ __('messages.save') }}</span>

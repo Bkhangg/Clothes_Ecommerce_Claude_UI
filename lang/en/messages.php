@@ -178,4 +178,9 @@ return [
     'leave_blank' => 'leave blank to keep current',
     'cannot_delete_admin' => 'Cannot delete admin users.',
     'account_disabled' => 'Your account has been disabled. Please contact administrator.',
+    'permissions' => 'Permissions',
+    'perm_manage-products' => 'Manage Products',
+    'perm_manage-categories' => 'Manage Categories',
+    'perm_manage-brands' => 'Manage Brands',
+    'perm_manage-orders' => 'Manage Orders',
 ];
