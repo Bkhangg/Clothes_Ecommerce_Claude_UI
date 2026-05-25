@@ -49,6 +49,16 @@
                 <span class="px-2 py-0.5 text-[10px] font-label uppercase tracking-[0.08em] rounded-full bg-neutral text-secondary/60">{{ \App\Models\Category::count() }}</span>
             </x-nav-link>
             @endcan
+
+            @can('manage-employees')
+            <x-nav-link href="{{ route('employees.index') }}" :active="request()->routeIs('employees.*')">
+                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+                <span class="flex-1">{{ __('messages.employees') }}</span>
+                <span class="px-2 py-0.5 text-[10px] font-label uppercase tracking-[0.08em] rounded-full bg-neutral text-secondary/60">{{ \App\Models\User::where('role', 'employee')->count() }}</span>
+            </x-nav-link>
+            @endcan
         </div>
 
         {{-- Profile + Language + Logout --}}
